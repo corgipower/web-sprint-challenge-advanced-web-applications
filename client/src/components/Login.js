@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
 
-const Login = () => {
+const Login = (props) => {
     const [user, setUser] = useState({
         username: '',
         password: '',
@@ -20,6 +20,7 @@ const Login = () => {
             .post('http://localhost:5000/api/login', user)
             .then(res => {
                 localStorage.setItem('token', res.data.payload)
+                props.history.push('/protected')
             })
             .catch(err => console.log(err));
     }
